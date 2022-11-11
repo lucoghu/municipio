@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <servlet>
+        <servlet-name>PersonaServlet</servlet-name>
+        <servlet-class>com.lucas.municipioweb.controlador.PersonaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReclamoServlet</servlet-name>
+        <servlet-class>com.lucas.municipioweb.controlador.ReclamoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonaServlet</servlet-name>
+        <url-pattern>/PersonaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReclamoServlet</servlet-name>
+        <url-pattern>/ReclamoServlet</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

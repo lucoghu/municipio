@@ -1,0 +1,94 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 15 oct. 2022, 22:13:50
+    Author     : Lucas Oliva
+*/
+
+h1 {
+    color: aqua;
+    text-align: center;
+}
+
+
+.linea {
+ /* border-top: 12px solid black;*/
+  border-top: 12px solid grey;
+  height: 2px;
+  /*max-width: 400px;*/
+  padding: 0;
+  margin: 20px auto 0 auto;
+}
+  
+.contenedor_registro{
+    width: 20%;
+    padding: 20px 20px;
+    background-color: #90c;/*rgb(28, 226, 216);*/
+    /*position: fixed;*/
+    /*align-content: center;*/
+    border-radius: 25px;
+    margin: auto;
+    margin-top: 50px;
+    
+ 
+}
+
+.contenedor_registro h3{
+    /*margin-bottom: 20px;*/
+    margin-top: 1px;
+}
+
+/*.contenedor_registro input{
+    background-color: #b2d8d8;  /*pone a todos los input con color, inclusive los botones submit
+}*/
+/*.contenedor_registro .button{
+    background-color: black;
+    border: none;
+    color:white;
+    padding: 15px 32px;
+    
+}*/
+/* .contenedor_registro num,ape,dni,fn,ml,tlf{
+    background-color: #b2d8d8;
+}*/
+.contenedor_registro p{  /*no lo esta tomando*/
+    color:white;
+} 
+    .contenedor_registro input{ /*no se si esta bien, quiero el boton negro, letras blancas*/
+        boton{
+            background-color: black;
+        }
+    }
+
+    .contenedor_login{
+    width: 23%;
+    padding: 20px 10px;
+    background-color: #00BFFF;/*rgb(0,250,154); /*#90c;/*rgb(28, 226, 216);*/
+    /*position: fixed;*/
+    /*align-content: center;*/
+    border-radius: 25px;
+    margin: auto;
+    margin-top: 50px;
+    }
+
+    .contenedor_login input[type=submit], input[type=reset]{
+        border:none;
+        background-color:#00FF7F; /* #00BFFF;*/
+        border-radius: 25px;
+
+    }
+    
+    .columna{
+        font-size: 22px;
+        color: blue;
+    }
+    
+    .fila{
+        font-size: 12px;
+        
+        text-align: center;
+    }
+    
+  
