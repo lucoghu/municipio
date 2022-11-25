@@ -17,18 +17,23 @@ public class Reclamo {
    // private LocalDate fecharesolucion;
     private Date fecharesolucion;  //LocalDate.now() fecha actual
     private String domicilio;
-    private int idpersona;
-    private int idcategoria;
-    private String comentario;
+    /*private int idpersona;
+    private int idcategoria; */
+    //hay que relacionar la tablas
+    private Categoria categoria;
+     private String comentario;
+    private Persona persona;
+    
 
-    public Reclamo(int idreclamo, Date fechacreacion, Date fecharesolucion, String domicilio, int idpersona, int idcategoria, String comentario) {
+    public Reclamo(int idreclamo, Date fechacreacion, Date fecharesolucion, String domicilio, Categoria categoria, String comentario, Persona persona) {
         this.idreclamo = idreclamo;
         this.fechacreacion = fechacreacion;
         this.fecharesolucion = fecharesolucion;
         this.domicilio = domicilio;
-        this.idpersona = idpersona;
-        this.idcategoria = idcategoria;
-        this.comentario = comentario;
+        this.categoria = categoria;
+         this.comentario = comentario;
+        this.persona = persona;
+     
     }
 
     public int getIdreclamo() {
@@ -63,21 +68,24 @@ public class Reclamo {
         this.domicilio = domicilio;
     }
 
-    public int getIdpersona() {
-        return idpersona;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setIdpersona(int idpersona) {
-        this.idpersona = idpersona;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
-    public int getIdcategoria() {
-        return idcategoria;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setIdcategoria(int idcategoria) {
-        this.idcategoria = idcategoria;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
+
+    
+  
 
     public String getComentario() {
         return comentario;

@@ -27,5 +27,28 @@ public class ModeloReclamo implements Modelo<Reclamo> {
            return reclamoDAO.crearReclamo(r);
      }
     
+     /* @Override
+    public Reclamo buscar(<?> dato){
+          return reclamoDAO.buscar(dato);
+    }*/
     
+    @Override
+    public int actualizar(Reclamo r) {
+           return reclamoDAO.actualizarReclamo(r); 
+    }
+           
+    @Override
+    public Reclamo buscarCadena(String dato){
+          return reclamoDAO.buscarCadena(dato);
+    }
+    
+   @Override
+    public Reclamo buscarEntero(int dato){
+          return reclamoDAO.buscarEntero(dato);
+    }
+    
+     @Override
+    public int eliminar(int dato) {
+           return reclamoDAO.eliminarReclamo(dato);
+     }
 }

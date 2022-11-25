@@ -5,6 +5,24 @@
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
    xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" 
    version="6.0">
+     
+      <servlet>
+        <servlet-name>PersonaServlet</servlet-name>
+        <servlet-class>com.lucas.municipioweb.controlador.PersonaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReclamoServlet</servlet-name>
+        <servlet-class>com.lucas.municipioweb.controlador.ReclamoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PersonaServlet</servlet-name>
+        <url-pattern>/PersonaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReclamoServlet</servlet-name>
+        <url-pattern>/ReclamoServlet</url-pattern>
+    </servlet-mapping>
+     
      <session-config>
         <session-timeout>
             30

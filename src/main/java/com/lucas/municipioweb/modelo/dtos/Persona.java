@@ -12,34 +12,48 @@ public class Persona {
     private String apellido;
     private String mail;
     private int telef;
-    private String user;
-    private String clave;
-    private boolean admin; //por defecto todas las personas son contribuyentes, es decir no administradores
+    //private String user;
+  //  private String clave;
+  //  private boolean admin; //por defecto todas las personas son contribuyentes, es decir no administradores
                            // false para contribuyente
 
-    public Persona(int idpersona, int dni, String nombre, String apellido, String mail, int telef,String user,String clave, boolean admin) {
+    public Persona() {  // lo uso en el método pullPreparedStatement de ReclamoDAO
+    }
+    
+    
+    public Persona(int idpersona, int dni, String nombre, String apellido, String mail, int telef) {
         this.idpersona = idpersona;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.telef = telef;
-        this.admin = admin;
     }
 
-    public Persona(int dni, String nombre, String apellido, String mail, int telef, String user, String clave, boolean admin) {
+    public Persona(int dni, String nombre, String apellido, String mail, int telef) {
         this.dni = dni;
         this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.telef = telef;
+    }
+
+  
+
+    
+/*  //para prueba
+
+    public Persona(int idpersona, int dni, String apellido, String mail, int telef, String user, String clave, boolean admin) {
+        this.idpersona = idpersona;
+        this.dni = dni;
         this.apellido = apellido;
         this.mail = mail;
         this.telef = telef;
         this.user = user;
         this.clave = clave;
         this.admin = admin;
-    }
+    }*/
 
-    
-    
     public int getIdpersona() {
         return idpersona;
     }
@@ -87,29 +101,9 @@ public class Persona {
     public void setTelef(int telef) {
         this.telef = telef;
     }
+    
 
-    public boolean isAdmin() {
-        return admin;
-    }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }   
+  
     
 }

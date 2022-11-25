@@ -56,16 +56,20 @@ h1 {
 .contenedor_registro p{  /*no lo esta tomando*/
     color:white;
 } 
-    .contenedor_registro input{ /*no se si esta bien, quiero el boton negro, letras blancas*/
-        boton{
-            background-color: black;
-        }
+
+ .contenedor_registro input[type=submit], input[type=reset]{
+        border:none;
+        background-color:#00FF7F; /* #00BFFF;*/
+        border-radius: 25px;
+
     }
+
+
 
     .contenedor_login{
     width: 23%;
     padding: 20px 10px;
-    background-color: #00BFFF;/*rgb(0,250,154); /*#90c;/*rgb(28, 226, 216);*/
+    background-color: #90c;/*rgb(0,250,154); /*#90c;/*rgb(28, 226, 216);*/
     /*position: fixed;*/
     /*align-content: center;*/
     border-radius: 25px;
@@ -82,7 +86,7 @@ h1 {
     
     .columna{
         font-size: 22px;
-        color: blue;
+        color: red;
     }
     
     .fila{
@@ -90,5 +94,29 @@ h1 {
         
         text-align: center;
     }
+    
+  .bot {
+	box-shadow: 3px 4px 0px 0px #8a2a21;
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+	background-color:#c62d1f;
+	border-radius:18px;
+	border:1px solid #b719cf;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:7px 25px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #810e05;
+}
+.bot:hover {  /* animación del Boton al pasar el mouse*/
+	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+	background-color:#f24437;
+}
+.bot:active {
+	position:relative;
+	top:1px;
+}
     
   

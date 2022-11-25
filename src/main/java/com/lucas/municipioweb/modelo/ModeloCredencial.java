@@ -1,40 +1,36 @@
 package com.lucas.municipioweb.modelo;
 
-import com.lucas.municipioweb.modelo.daos.PersonaDAO;
-import com.lucas.municipioweb.modelo.dtos.Persona;
+import com.lucas.municipioweb.modelo.daos.CredencialDAO;
+import com.lucas.municipioweb.modelo.dtos.Credencial;
 import java.util.Collection;
 
 /**
  *
  * @author Lucas Oliva
- * 
- * 
  */
-public class ModeloPersona implements Modelo<Persona> {
-   // public class ModeloPersona<Persona> implements Modelo<Persona> {
-     
-     // Persona T;
-    private PersonaDAO personaDAO;
+public class ModeloCredencial implements Modelo<Credencial>{
+    
+     private CredencialDAO credencialDAO;
    
 
-    public ModeloPersona(PersonaDAO personaDAO) {
-        this.personaDAO = personaDAO;
+    public ModeloCredencial(CredencialDAO credencialDAO) {
+        this.credencialDAO = credencialDAO;
     }
 
     @Override
-    public Collection<Persona> listar() {
+    public Collection<Credencial> listar() {
         
        //Collection<Persona> personas=personaDAO.listarPersonas();  //para prueba
         // System.out.println("com.lucas.municipioweb.modelo.ModeloPersona.listar()");//para prueba
     
-        return personaDAO.listarPersonas();
+        return credencialDAO.listarCredenciales();
  
     }
 
     
     @Override
-    public int crear(Persona p) {
-           return personaDAO.crearPersona(p);
+    public int crear(Credencial c) {
+           return credencialDAO.crearCredencial(c);
      }
   /* 
       @Override
@@ -48,23 +44,23 @@ public class ModeloPersona implements Modelo<Persona> {
     }*/
     
     @Override
-    public int actualizar(Persona p) {
-           return personaDAO.actualizarPersona(p);    
+    public int actualizar(Credencial c) {
+           return credencialDAO.actualizarCredencial(c);    
     }
     
     @Override
-    public Persona buscarCadena(String dato){
-         return personaDAO.buscarCadena(dato);
+    public Credencial buscarCadena(String dato){
+         return credencialDAO.buscarCadena(dato);
     }
       
     @Override
-    public Persona buscarEntero(int dato){
-          return personaDAO.buscarEntero(dato);
+    public Credencial buscarEntero(int dato){
+          return credencialDAO.buscarEntero(dato);
     }
           
      @Override
     public int eliminar(int dato) {
-           return personaDAO.eliminarPersona(dato);    
+           return credencialDAO.eliminarCredencial(dato);    
     }
     
      // para verficar funcionamiento
@@ -72,4 +68,5 @@ public class ModeloPersona implements Modelo<Persona> {
         ModeloPersona per=new ModeloPersona(new PersonaDAO());
         per.listar();
     }*/
+
 }
