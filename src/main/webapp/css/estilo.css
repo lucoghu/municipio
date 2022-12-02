@@ -57,15 +57,14 @@ h1 {
     color:white;
 } 
 
- .contenedor_registro input[type=submit], input[type=reset]{
+    .contenedor_registro input[type=submit], input[type=reset]{
         border:none;
         background-color:#00FF7F; /* #00BFFF;*/
         border-radius: 25px;
 
     }
 
-
-
+    
     .contenedor_login{
     width: 23%;
     padding: 20px 10px;
@@ -110,13 +109,28 @@ h1 {
 	text-decoration:none;
 	text-shadow:0px 1px 0px #810e05;
 }
+
 .bot:hover {  /* animación del Boton al pasar el mouse*/
 	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
 	background-color:#f24437;
 }
+
 .bot:active {
 	position:relative;
 	top:1px;
-}
+}   
+
+.lgi{
+ color: #f24437
+    }
+    
+ .Bienvenido{
+     color: white;
+     text-align: center;
+    }
+ 
+ .menu{
+     font-size: x-large;   
+    }
     
   

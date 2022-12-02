@@ -12,15 +12,35 @@ public class Persona {
     private String apellido;
     private String mail;
     private int telef;
-    //private String user;
-  //  private String clave;
-  //  private boolean admin; //por defecto todas las personas son contribuyentes, es decir no administradores
-                           // false para contribuyente
+    private String user;
+    private String clave;
+    private int admin; //por defecto todas las personas son contribuyentes(0), es decir no administradores
+                           // 0 para contribuyente, 1 para administrador
 
-    public Persona() {  // lo uso en el método pullPreparedStatement de ReclamoDAO
+
+    public Persona(int idpersona, int dni,String nombre, String apellido, String mail, int telef, String user, String clave, int admin) {
+        this.idpersona = idpersona;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.telef = telef;
+        this.user = user;
+        this.clave = clave;
+        this.admin = admin;
     }
-    
-    
+
+    public Persona(int dni, String nombre, String apellido, String mail, int telef, String user, String clave, int admin) {
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.telef = telef;
+        this.user = user;
+        this.clave = clave;
+        this.admin = admin;
+    }
+
     public Persona(int idpersona, int dni, String nombre, String apellido, String mail, int telef) {
         this.idpersona = idpersona;
         this.dni = dni;
@@ -30,29 +50,11 @@ public class Persona {
         this.telef = telef;
     }
 
-    public Persona(int dni, String nombre, String apellido, String mail, int telef) {
-        this.dni = dni;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mail = mail;
-        this.telef = telef;
+    public Persona() {
     }
 
-  
-
     
-/*  //para prueba
-
-    public Persona(int idpersona, int dni, String apellido, String mail, int telef, String user, String clave, boolean admin) {
-        this.idpersona = idpersona;
-        this.dni = dni;
-        this.apellido = apellido;
-        this.mail = mail;
-        this.telef = telef;
-        this.user = user;
-        this.clave = clave;
-        this.admin = admin;
-    }*/
+    
 
     public int getIdpersona() {
         return idpersona;
@@ -101,9 +103,29 @@ public class Persona {
     public void setTelef(int telef) {
         this.telef = telef;
     }
-    
 
+    public String getUser() {
+        return user;
+    }
 
-  
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public int getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(int admin) {
+        this.admin = admin;
+    }  
     
 }

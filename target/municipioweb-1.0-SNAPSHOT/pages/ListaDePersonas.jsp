@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="../css/estilo.css"/>
     </head>
     <body>
+        <h1>Municipio Web</h1>
+        <div class="linea"></div>
+         <p class="Bienvenido">Bienvenido : ${usuariosesion} </p>
         <h1>PANEL ADMINSTRADOR</h1>
         <%--= personas --%>
         <table border="1px solid black">
@@ -24,7 +27,7 @@
                 <th class="columna">Teléfono</th>
                 <th class="columna">Acciones</th>
                  
-                <!-- comment  <th class="columna">User</th>
+              <!--  <th class="columna">User</th>
                 <th class="columna">Clave</th>
                 <th class="columna">Admin</th> -->
             </tr>
@@ -48,7 +51,7 @@
                         
                         
                         <a id="eliminarPersona" href="<c:url value="ServletPersona">
-                            <c:param name="accion" value="eliminar" />
+                            <c:param name="accion" value="buscaridPersona" />
                             <c:param name="idpersona" value="${persona.idpersona}"/>  </c:url>"
                             class="bot"> Eliminar</a>
                         <!--<button type="button" class="bot" title="Eliminar">Eliminar </button> -->
@@ -63,5 +66,8 @@
         <%--   <c:forEach var="persona" items="${Lista}" >
             <c:out value="${persona.nombre}" />
         </c:forEach> --%>
+        <form action="cerrar" method="post">
+          <input type="submit" value="Cerrar Sesión">
+        </form>
     </body>
 </html>

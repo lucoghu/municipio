@@ -14,7 +14,7 @@ public class ModeloPersona implements Modelo<Persona> {
    // public class ModeloPersona<Persona> implements Modelo<Persona> {
      
      // Persona T;
-    private PersonaDAO personaDAO;
+        private PersonaDAO personaDAO;
    
 
     public ModeloPersona(PersonaDAO personaDAO) {
@@ -56,17 +56,21 @@ public class ModeloPersona implements Modelo<Persona> {
     public Persona buscarCadena(String dato){
          return personaDAO.buscarCadena(dato);
     }
-      
+     
     @Override
-    public Persona buscarEntero(int dato){
+    public Persona buscarKey(int dato){
+          return personaDAO.buscarKey(dato);
+    }
+       
+    
+   @Override
+    public Collection<Persona> buscarEntero(int dato){
           return personaDAO.buscarEntero(dato);
     }
           
-     @Override
-    public int eliminar(int dato) {
-           return personaDAO.eliminarPersona(dato);    
-    }
-    
+  /*  public int VerficarCadena(String dato){
+         return personaDAO.VerificarCadena(dato);
+    }    */
      // para verficar funcionamiento
   /* public static void main(String[] args) {
         ModeloPersona per=new ModeloPersona(new PersonaDAO());

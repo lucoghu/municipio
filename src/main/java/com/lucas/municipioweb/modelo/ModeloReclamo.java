@@ -42,13 +42,18 @@ public class ModeloReclamo implements Modelo<Reclamo> {
           return reclamoDAO.buscarCadena(dato);
     }
     
-   @Override
-    public Reclamo buscarEntero(int dato){
-          return reclamoDAO.buscarEntero(dato);
+  /*  @Override
+    public <H> H prueba(int dato){
+          return (H) reclamoDAO.prueba(dato);
+    }*/
+    
+    @Override
+    public Reclamo buscarKey(int dato){
+          return reclamoDAO.buscarKey(dato);
     }
     
-     @Override
-    public int eliminar(int dato) {
-           return reclamoDAO.eliminarReclamo(dato);
-     }
+    @Override
+    public Collection<Reclamo> buscarEntero(int dato){
+          return reclamoDAO.buscarEntero(dato);
+    }
 }

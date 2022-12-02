@@ -8,10 +8,6 @@
         <servlet-name>ReclamoServlet</servlet-name>
         <servlet-class>com.lucas.municipioweb.controlador.ReclamoServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>CredencialServlet</servlet-name>
-        <servlet-class>com.lucas.municipioweb.controlador.CredencialServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>PersonaServlet</servlet-name>
         <url-pattern>/PersonaServlet</url-pattern>
@@ -19,10 +15,6 @@
     <servlet-mapping>
         <servlet-name>ReclamoServlet</servlet-name>
         <url-pattern>/ReclamoServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CredencialServlet</servlet-name>
-        <url-pattern>/CredencialServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -23,35 +23,35 @@ import java.sql.Date;
 public class ReclamoDAO {
     
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/municipioweb?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String URL = "jdbc:mysql://localhost:3306/municipio?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
-    private static final String PASS = "root";
+    private static final String PASS = "baseUTN2021";
     
    // private static final String CONSULTA_TODOS = "SELECT * FROM reclamo";
-   // private static final String CONSULTA_TODOS = "SELECT * FROM reclamo INNER JOIN persona ON reclamo.Persona_idpersona=persona.idpersona";
-    //private static final String CONSULTA_TODOS = "SELECT idreclamo, FechaCreacion, FechaResolucion, Domicilio, Categoria_idcategoria, Comentario, persona.* FROM reclamo INNER JOIN persona ON reclamo.Persona_idpersona=persona.idpersona";
     private static final String CONSULTA_TODOS ="SELECT idreclamo, FechaCreacion, FechaResolucion, Domicilio,categoria.*,Comentario, persona.* FROM (reclamo INNER JOIN categoria ON reclamo.Categoria_idcategoria=categoria.idcategoria ) INNER JOIN persona ON reclamo.Persona_idpersona=persona.idpersona";
     private static final String CONSULTA_INSERTAR = "INSERT INTO reclamo VALUES(null, ?, ?, ?, ?, ?, ?)";
     private static final String CONSULTA_DOMICILIO = "SELECT * FROM reclamo WHERE Domicilio=?";
     private static final String CONSULTA_ID = "SELECT * FROM reclamo WHERE idreclamo=?";
     private static final String CONSULTA_ACTUALIZAR = "UPDATE reclamo SET FechaCreacion=?, FechaResolucion=?, Domicilio=?, Persona_idpersona=?, Categoria_idcategoria=? Comentario=? WHERE idreclamo=?";
     private static final String CONSULTA_ELIMINAR = "DELETE FROM reclamo WHERE idreclamo=?";
+    //Consulta ID Foranea
+    private static final String CONSULTA_IDP = "SELECT idreclamo, FechaCreacion, FechaResolucion, Domicilio,categoria.*,Comentario, persona.* FROM (reclamo INNER JOIN categoria ON reclamo.Categoria_idcategoria=categoria.idcategoria ) INNER JOIN persona ON reclamo.Persona_idpersona=persona.idpersona WHERE Persona_idpersona=?" ;
     
     public Collection<Reclamo> listarReclamos()  {
-        Collection<Reclamo> reclamos = new ArrayList<>();
+         Collection<Reclamo> reclamos = new ArrayList<>();
          PreparedStatement ps;
          ResultSet rs;
-        try{
+         try{
              Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
              String instruccionSQL= CONSULTA_TODOS;
              ps=con.prepareStatement(instruccionSQL);
              rs=ps.executeQuery();
              
              while(rs.next()){
-                //Persona p= new Persona(); //necesito contructor de Persona sin 
-                reclamos.add(new Reclamo(rs.getInt(1),rs.getDate(2),rs.getDate(3),rs.getString(4),
-                     new Categoria(rs.getInt(5),TipoCategoria.valueOf(rs.getString(6).toUpperCase())) ,rs.getString(7),
-                     new Persona(rs.getInt(8),rs.getInt(9),rs.getString(10),rs.getString(11), rs.getString(12),rs.getInt(13))));
+                 reclamos.add(new Reclamo(rs.getInt(1),rs.getDate(2),rs.getDate(3),rs.getString(4),
+                   new Categoria(rs.getInt(5),TipoCategoria.valueOf(rs.getString(6).toUpperCase())) ,rs.getString(7),
+                  new Persona(rs.getInt(8),rs.getInt(9),rs.getString(10),rs.getString(11), rs.getString(12),rs.getInt(13),rs.getString(14),rs.getString(15),rs.getInt(16))));
+
              }
         }catch (SQLException ex) {
             throw new RuntimeException("No se pudo obtener el Listado de Reclamos", ex);
@@ -79,7 +79,8 @@ public class ReclamoDAO {
     return insertado;
     }
      
- 
+     
+   //método que lo utliza el adminsitrador, por ejemplo para actualizar fechas
      public int actualizarReclamo(Reclamo updatereclamo)  {
      int actualizado=0;
      PreparedStatement ps;
@@ -93,7 +94,7 @@ public class ReclamoDAO {
         } catch (SQLException ex) {
                  throw new RuntimeException("Error de sintaxis SQL", ex);
         } catch (Exception ex) {
-            throw new RuntimeException("Error al modificar Reclamo", ex);
+            throw new RuntimeException("Error al modificar Persona", ex);
         }
    
      return actualizado;
@@ -103,7 +104,7 @@ public class ReclamoDAO {
      
      
       private void fillPreparedStatement(PreparedStatement ps, Reclamo rec) throws SQLException {
-        ps.setDate(1, (Date) rec.getFechacreacion()); 
+       ps.setDate(1, (Date) rec.getFechacreacion()); 
        // Categoria c=new Categoria();
        
 // el casteo que sugirio la IDE de getFechacreacion() y getFecharesolucion()(setters) es porque
@@ -118,8 +119,8 @@ public class ReclamoDAO {
          
      }
       
-      //para darle los valores a los atributos de Reclamo
-        private Reclamo pullPreparedStatement(ResultSet rs) throws SQLException {
+      
+       private Reclamo pullPreparedStatement(ResultSet rs) throws SQLException {
         Persona p=new Persona();
         Categoria c=new Categoria();
         int id= rs.getInt(1);
@@ -135,16 +136,18 @@ public class ReclamoDAO {
      }
        
       
-     public Reclamo buscarCadena(String dato){  //Hay que hacerlo porque Modelo reclmo debe implementara Modelo,
-     Reclamo reclamo=null;                     // además sirve para buscar por Domicilio
+     public Reclamo buscarCadena(String dato){  //sirve para buscar por Domicilio
+     Reclamo reclamo=null;                    
      PreparedStatement ps;
      ResultSet rs;
          try {
              Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS); 
              String instruccionSQL= CONSULTA_DOMICILIO;
              ps=con.prepareStatement(instruccionSQL);
-             ps.setString(1, dato);  
-             rs=ps.executeQuery(); 
+             ps.setString(1, dato);
+             rs=ps.executeQuery(); //se considera que el nombre de usuario no se repite, ver como validar eso
+            // if(ps.executeQuery()!=null)  //el campo Admin puede ser null, cero(administrador) o uno(usuario)
+            // while(rs.next()){
              if(rs.next()){ reclamo= pullPreparedStatement(rs);}
              
         } catch (SQLException ex) {
@@ -156,7 +159,7 @@ public class ReclamoDAO {
     }
        
      
-     public Reclamo buscarEntero(int dato){ 
+     public Reclamo buscarKey(int dato){ 
      Reclamo reclamo=null;
      PreparedStatement ps;
      ResultSet rs;
@@ -176,8 +179,8 @@ public class ReclamoDAO {
         return reclamo;
     }
        
-    
-      public int eliminarReclamo(int id)  {
+     
+     public int eliminarReclamo(int id)  {
       int eliminado=0;
         PreparedStatement ps;
           try {
@@ -194,6 +197,29 @@ public class ReclamoDAO {
         }   
       return eliminado;
      }
-
        
+     
+     public  Collection<Reclamo> buscarEntero(int dato)  {
+        Collection<Reclamo> reclamos = new ArrayList<>();
+        PreparedStatement ps;
+        ResultSet rs;
+        try {
+             Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS); 
+             String instruccionSQL= CONSULTA_IDP;
+             ps=con.prepareStatement(instruccionSQL);
+             ps.setInt(1, dato);  
+             rs=ps.executeQuery();
+            while(rs.next()){
+                 reclamos.add(new Reclamo(rs.getInt(1),rs.getDate(2),rs.getDate(3),rs.getString(4),
+                     new Categoria(rs.getInt(5),TipoCategoria.valueOf(rs.getString(6).toUpperCase())) ,rs.getString(7),
+                     new Persona(rs.getInt(8),rs.getInt(9),rs.getString(10),rs.getString(11), rs.getString(12),rs.getInt(13),rs.getString(14),rs.getString(15),rs.getInt(16))));
+             }
+             
+        } catch (SQLException ex) {
+                 throw new RuntimeException("Error de sintaxis SQL", ex);
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al buscar Reclamo", ex);
+        }
+        return reclamos;
+      }
 }

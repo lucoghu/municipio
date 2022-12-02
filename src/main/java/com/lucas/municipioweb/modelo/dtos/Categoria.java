@@ -17,6 +17,12 @@ public class Categoria {
         this.categoria = categoria;
     }
 
+    public Categoria(TipoCategoria categoria) {
+        this.categoria = categoria;
+    }
+
+    
+    
     public int getIdcategoria() {
         return idcategoria;
     }

@@ -15,16 +15,15 @@
     <h1>Municipio Web</h1>
     <div class="linea"></div>
     
-   <%-- <%@ page import="com.lucas.municipioweb.controlador.PersonaServlet" %> --%>
     <div class="contenedor_registro">
         <h3>Registro en Municipio Web</h3>
-        
+         
         <!-- Este inserta si hago en el Servlet
           if((accion == null) || accion.isEmpty()){
             accion="listar";
         Pero en la url no se ve ?accion=insertar
         -->
-       <form action="${pageContext.request.contextPath}/PersonaServlet?accion=insertar" method="get">
+       <form action="${pageContext.request.contextPath}/PersonaServlet?accion=insertar" method="post">
        
        
         
@@ -48,20 +47,16 @@
          <label for="dni">Dni:</label>
          <input type="number" id="dni" name="dni">
          <br><br>
-
-         <!-- comment  <label for="fn">Fecha de Nacimiento:</label>
-         <input type="date" id="fn" name="fecnac" required>
-         <br><br> -->
     
          <label for="ml">Mail:</label>
          <input type="email" id="ml" name="mail" placeholder="tucorreo@mail.com">
          <br><br>
 
          <label for="tlf">Telefono:</label>
-         <input type="tel" id="tlf" name="telefono">
+         <input type="number" id="tlf" name="telefono">
          <br><br>
          
-         <!-- comment  <label for="us">Usuario:</label>
+         <label for="us">Usuario:</label>
          <input type="text" id="us" name="usuario" placeholder="elija un nombre de usuario" required="">
          <br><br>
          
@@ -72,9 +67,9 @@
          <input id="boton" type="submit" value="Aceptar">
          <input type="reset" value="Blanquear">
          
-         <!--<p> Ya tengo Cuenta<a href="./login.html">Iniciar Sesión</a></p> -->
-         <p> Ya tengo Cuenta<a href="../pages/login.html">Iniciar Sesión</a></p>
+         <p> Ya tengo Cuenta<a href="../pages/login.jsp">Iniciar Sesión</a></p>
        </form>
      </div>
+     <p><a href="index.jsp">Volver a MunicipioWeb</a></p>
 </body>
 </html>

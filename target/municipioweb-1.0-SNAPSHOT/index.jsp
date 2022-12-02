@@ -14,6 +14,6 @@
     <h1>Municipio Web</h1>
     <div class="linea"></div>
     <a href="./pages/registro.jsp">Registrar Usuario</a>
-    <p style="color: white"> Ya tengo Cuenta  <a href="pages/login.html">Iniciar Sesión</a></p>
+    <p style="color: white"> Ya tengo Cuenta  <a href="pages/login.jsp">Iniciar Sesión</a></p>
 </body>
 </html> 
