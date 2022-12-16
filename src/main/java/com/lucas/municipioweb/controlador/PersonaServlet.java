@@ -1,24 +1,28 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package com.lucas.municipioweb.controlador;
 
 import com.lucas.municipioweb.modelo.Modelo;
 import com.lucas.municipioweb.modelo.ModeloPersona;
+import com.lucas.municipioweb.modelo.ModeloReclamo;
 import com.lucas.municipioweb.modelo.daos.PersonaDAO;
+import com.lucas.municipioweb.modelo.daos.ReclamoDAO;
 import com.lucas.municipioweb.modelo.dtos.Persona;
+import com.lucas.municipioweb.modelo.dtos.Reclamo;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.sql.SQLDataException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 
 /**
  *
@@ -40,6 +44,8 @@ public class PersonaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        doPost(request, response);
     }
   
     
@@ -50,7 +56,7 @@ public class PersonaServlet extends HttpServlet {
      String accion = request.getParameter("accion");  
         
         if((accion == null) || accion.isEmpty()){
-            accion="listar";
+            accion="listar"; }
             
           switch (accion) {   
             case "listar":             
@@ -69,7 +75,20 @@ public class PersonaServlet extends HttpServlet {
                       //  ex.printStackTrace();
                     }
                   break;
-               
+                
+             case "actualizar":             
+                 actualizarPersona(request, response);
+                 break;
+                  
+              case "eliminar":             
+                try {
+                 eliminarPersona(request, response);
+                 } catch (Exception ex) {
+                 request.setAttribute("mensaje", "No se pudo eliminar a la persona" + ex.getMessage());
+                 }
+         
+                 break;   
+                 
               case "validar":             
                     validarPersona(request, response);
                     break;
@@ -78,10 +97,15 @@ public class PersonaServlet extends HttpServlet {
                     cerrarSesion(request, response);
                     break;
             }
-        }
+        
    
     }
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
@@ -151,12 +175,15 @@ public class PersonaServlet extends HttpServlet {
           int idpersona=Integer.parseInt(request.getParameter("idpersona")); //todo lo que viene de un JSP o HTML es una cadena
           
           p=modelo.buscarKey(idpersona); //trae todo el objeto Persona, incluso su id, en este caso el id no hace
+          //falta pero lo dejo así porque sino hay que hacer otro pullPreparedStatement en la Clase PersonaDAO donde
+          // se llame al constructor de Persona sin el id, y al hacer esto ya no sirve el pullPreparedStatement para
+          //cuando necesite buscar por un String en lugar de un Entero( se necita extraer id de BD porque no viene como parametro)
           request.setAttribute("personaencontrada", p);
           
           //envio los datos de la personaencontrada al formulario de actualización, para actualizar datos
-          RequestDispatcher rd;
-          rd=request.getRequestDispatcher("pages/FormularioActualizacion.jsp");
-          rd.forward(request, response);
+         RequestDispatcher rd;
+         rd=request.getRequestDispatcher("pages/FormularioActualizacion.jsp");
+         rd.forward(request, response);
      }
     
     
@@ -172,21 +199,24 @@ public class PersonaServlet extends HttpServlet {
           int telef=Integer.parseInt(request.getParameter("telefono"));  
           actualizada= modelo.actualizar(new Persona(idpersona,dni, nombre, apellido, mail,telef ));
        
-          // RequestDispatcher rd;
           if(actualizada!=0){
-         //redirecciono el servlet mediante el objeto rd hacia el login.jsp
-          response.sendRedirect("pages/login.jsp");
-         // rd=request.getRequestDispatcher("pages/login.jsp");
-         //rd.forward(request, response); 
-             } else {
-                 response.sendRedirect("pages/registro.jsp");
-           //rd=request.getRequestDispatcher("pages/registro.jsp"); //ver como mostrar erro de Registro
-           }
+               listadoPersonas(request, response);
+          } 
+ 
        }
 
     
+      private void eliminarPersona(HttpServletRequest request, HttpServletResponse response)  
+      throws Exception {
+          int eliminada=0;
+          int idpersona=Integer.parseInt(request.getParameter("idpersona"));
+          eliminada=modelo.eliminar(idpersona);
+          if(eliminada!=0){
+           listadoPersonas(request, response);
+          }
+     }
     
-    
+      
     private void validarPersona(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException{
         
@@ -209,13 +239,17 @@ public class PersonaServlet extends HttpServlet {
         sesion.setMaxInactiveInterval(1000); 
         sesion.setAttribute("persona", p);  
            
+           
            if(p.getAdmin()==0){
+//direcciono al PANEL CONTRIBUYENTE,y recupero la variable dentro de este panel con session.getAtribute("usuariosesion")
+ // pare hay que hacer un casteo a Sttring   porque session.getAtribute("usuariosesion") es un objeto tipo session
+ //osea en el PANEL hacer String usuario=(String)session.getAtribute("usuariosesion")
               RequestDispatcher rd;
               rd=request.getRequestDispatcher("pages/PanelContribuyente.jsp");
               rd.forward(request, response);
-            }else { //direcciono al PANEL ADMINSTRADOR, y recupero la variable dentro de este panel con session.getAtribute("usuariosesion")
+            }else { //direccion al PANEL ADMINSTRADOR, y recupero la variable dentro de este panel con session.getAtribute("usuariosesion")
                 RequestDispatcher rd;
-                rd=request.getRequestDispatcher("pages/PanelAdministrador.jsp");
+                rd=request.getRequestDispatcher("/pages/PanelAdministrador.jsp");
                 rd.forward(request, response);
             }  
                 
@@ -238,5 +272,32 @@ public class PersonaServlet extends HttpServlet {
          response.sendRedirect("index.jsp");
         
     }
+      
+     
+    
+    //*************para verificar************
+ /*   
+    private void buscarUser(HttpServletRequest request, HttpServletResponse response) {
+          String usuario=request.getParameter("usuario");
+          String clave=request.getParameter("password");
+          Persona p;
+          //try
+          p=modelo.buscarCadena(usuario);             
+       
+     }
+    
+   
+    public void mostrar(){
+    Collection<Persona>  personas;
+     personas = modelo.listar();
+    }
+    public static void main(String[] args) {
+       
+      PersonaServlet p = new PersonaServlet();
+       p.mostrar();
+        
+    }
+
+  */
         
 }

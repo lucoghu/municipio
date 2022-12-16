@@ -8,7 +8,6 @@
     <title>Municipio</title>
 
     <link rel="stylesheet" href="css/estilo.css"/>
-    <!-- <link type="text/css" rel="stylesheet" href="css/mycss.css"> (type="text/css" no es necesario)-->
 </head>
 <body style="background: black">
     <h1>Municipio Web</h1>

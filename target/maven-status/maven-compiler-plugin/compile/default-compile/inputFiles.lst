@@ -1,13 +1,14 @@
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\dtos\TipoCategoria.java
-E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\controlador\JakartaRestConfiguration.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\controlador\PersonaServlet.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\Modelo.java
+E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\JakartaRestConfiguration.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\ModeloPersona.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\daos\CategoriaDAO.java
+E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipio\resources\JakartaEE9Resource.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\daos\PersonaDAO.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\dtos\Categoria.java
-E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\resources\JakartaEE9Resource.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\daos\ReclamoDAO.java
+E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\controlador\prueba.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\dtos\Reclamo.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\controlador\ReclamoServlet.java
 E:\luc\UTN\CURSADA 2022\Progracion 2\Para 2 parcial\trabajo final\reclamos-municipio-Oliva-Lucas\src\main\java\com\lucas\municipioweb\modelo\ModeloCategoria.java

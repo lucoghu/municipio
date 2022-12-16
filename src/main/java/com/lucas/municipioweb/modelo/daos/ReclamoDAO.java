@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.time.LocalDate;
 //import java.util.Date;  // da error al importar
 
@@ -26,16 +28,16 @@ public class ReclamoDAO {
     private static final String URL = "jdbc:mysql://localhost:3306/municipio?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
     private static final String PASS = "baseUTN2021";
-    
-   // private static final String CONSULTA_TODOS = "SELECT * FROM reclamo";
     private static final String CONSULTA_TODOS ="SELECT idreclamo, FechaCreacion, FechaResolucion, Domicilio,categoria.*,Comentario, persona.* FROM (reclamo INNER JOIN categoria ON reclamo.Categoria_idcategoria=categoria.idcategoria ) INNER JOIN persona ON reclamo.Persona_idpersona=persona.idpersona";
     private static final String CONSULTA_INSERTAR = "INSERT INTO reclamo VALUES(null, ?, ?, ?, ?, ?, ?)";
     private static final String CONSULTA_DOMICILIO = "SELECT * FROM reclamo WHERE Domicilio=?";
     private static final String CONSULTA_ID = "SELECT * FROM reclamo WHERE idreclamo=?";
     private static final String CONSULTA_ACTUALIZAR = "UPDATE reclamo SET FechaCreacion=?, FechaResolucion=?, Domicilio=?, Persona_idpersona=?, Categoria_idcategoria=? Comentario=? WHERE idreclamo=?";
     private static final String CONSULTA_ELIMINAR = "DELETE FROM reclamo WHERE idreclamo=?";
+    private static final String CONSULTA_IDCAT = "SELECT idcategoria FROM categoria WHERE categoria=?";
     //Consulta ID Foranea
     private static final String CONSULTA_IDP = "SELECT idreclamo, FechaCreacion, FechaResolucion, Domicilio,categoria.*,Comentario, persona.* FROM (reclamo INNER JOIN categoria ON reclamo.Categoria_idcategoria=categoria.idcategoria ) INNER JOIN persona ON reclamo.Persona_idpersona=persona.idpersona WHERE Persona_idpersona=?" ;
+    private static final String CONSULTA_NOMCAT = "SELECT categoria FROM categoria WHERE idcategoria=?";
     
     public Collection<Reclamo> listarReclamos()  {
          Collection<Reclamo> reclamos = new ArrayList<>();
@@ -67,9 +69,9 @@ public class ReclamoDAO {
             Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS); 
             String instruccionSQL= CONSULTA_INSERTAR;
             ps=con.prepareStatement(instruccionSQL);
+            nuevoreclamo.getCategoria().setIdcategoria(obtenerIdCategoria(nuevoreclamo));
             fillPreparedStatement(ps,nuevoreclamo);
             insertado= ps.executeUpdate();
- //executeUpdate() devuelve 0 si la instrucción no modifica nada, o devuelve la cantidad de registros modificados(insertados en este caso)
         } catch (SQLException ex) {
                  throw new RuntimeException("Error de sintaxis SQL", ex);
         } catch (Exception ex) {
@@ -80,7 +82,7 @@ public class ReclamoDAO {
     }
      
      
-   //método que lo utliza el adminsitrador, por ejemplo para actualizar fechas
+   //método que lo utliza el administrador, por ejemplo para actualizar fechas
      public int actualizarReclamo(Reclamo updatereclamo)  {
      int actualizado=0;
      PreparedStatement ps;
@@ -104,15 +106,9 @@ public class ReclamoDAO {
      
      
       private void fillPreparedStatement(PreparedStatement ps, Reclamo rec) throws SQLException {
-       ps.setDate(1, (Date) rec.getFechacreacion()); 
-       // Categoria c=new Categoria();
-       
-// el casteo que sugirio la IDE de getFechacreacion() y getFecharesolucion()(setters) es porque
-//retornan tipos Date de java.util.Date, y usar ps.setDate se usa el Date de java.sql.Date
-//pero si fuese así no debería import java.util.Date; ?????
+        ps.setDate(1, (Date) rec.getFechacreacion()); 
         ps.setDate(2, (Date) rec.getFecharesolucion());
         ps.setString(3, rec.getDomicilio());
-        //ps.setInt(4, rec.getIdcategoria());
         ps.setInt(4, rec.getPersona().getIdpersona());
         ps.setInt(5, rec.getCategoria().getIdcategoria());
         ps.setString(6, rec.getComentario());
@@ -135,6 +131,24 @@ public class ReclamoDAO {
         return r;       
      }
        
+   //neceario para en el reclamo llegue al servlet la categoria(enum) y mostrarla en el formularioActualizacionReclamo
+   //se usa en buscarKey(int dato)
+       /*    private Reclamo pullPreparedStatementActualizacion(ResultSet rs) throws SQLException {
+        Persona p=new Persona();
+        //Categoria c=new Categoria();
+        int id= rs.getInt(1);
+        Date fc= rs.getDate(2);
+        Date fr= rs.getDate(3);
+        String domicilio=rs.getString(4);
+       // c.setIdcategoria(rs.getInt(6));
+        Categoria cate= new Categoria(rs.getInt(6),obtenerTipoCategoria(rs.getInt(6)));
+        String comentario=rs.getString(7);
+        p.setIdpersona(rs.getInt(5));
+        
+        Reclamo r=new Reclamo(id, fc, fr, domicilio, cate, comentario ,p);
+        return r;       
+     }  */
+       
       
      public Reclamo buscarCadena(String dato){  //sirve para buscar por Domicilio
      Reclamo reclamo=null;                    
@@ -145,9 +159,7 @@ public class ReclamoDAO {
              String instruccionSQL= CONSULTA_DOMICILIO;
              ps=con.prepareStatement(instruccionSQL);
              ps.setString(1, dato);
-             rs=ps.executeQuery(); //se considera que el nombre de usuario no se repite, ver como validar eso
-            // if(ps.executeQuery()!=null)  //el campo Admin puede ser null, cero(administrador) o uno(usuario)
-            // while(rs.next()){
+             rs=ps.executeQuery();
              if(rs.next()){ reclamo= pullPreparedStatement(rs);}
              
         } catch (SQLException ex) {
@@ -169,7 +181,16 @@ public class ReclamoDAO {
              ps=con.prepareStatement(instruccionSQL);
              ps.setInt(1, dato);  
              rs=ps.executeQuery(); 
-             if(rs.next()){ reclamo= pullPreparedStatement(rs);}
+             if(rs.next()){ 
+                 reclamo= pullPreparedStatement(rs);
+                 //reclamo= pullPreparedStatementActualizacion(rs);
+                 // ó
+    /*ESTAs 2 LINEAS SIRVEN PARA QUE SE MUESTRE EL CAMPO CATEGORIA EN EL
+      FormularioActualizacion   
+                 Categoria cate= new Categoria(reclamo.getCategoria().getIdcategoria(),obtenerTipoCategoria(reclamo.getCategoria().getIdcategoria()));
+                 reclamo.setCategoria(cate);
+             */  
+             }
              
         } catch (SQLException ex) {
                  throw new RuntimeException("Error de sintaxis SQL", ex);
@@ -189,7 +210,6 @@ public class ReclamoDAO {
              ps=con.prepareStatement(instruccionSQL);
              ps.setInt(1, id);  
              eliminado=ps.executeUpdate();
- //executeUpdate() devuelve 0 si la instrucción no elimina nada, o devuelve la cantidad de registros eliminados.
         } catch (SQLException ex) {
                  throw new RuntimeException("Error de sintaxis SQL", ex);
         } catch (Exception ex) {
@@ -222,4 +242,44 @@ public class ReclamoDAO {
         }
         return reclamos;
       }
+     
+     public int obtenerIdCategoria(Reclamo r){
+         int idcategoria=0;
+         try {
+            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
+            PreparedStatement ps;
+            ResultSet rs;
+            String instruccionSQL= CONSULTA_IDCAT;
+            ps=con.prepareStatement(instruccionSQL);
+            ps.setString(1, r.getCategoria().getCategoria().toString());
+            rs=ps.executeQuery();
+              if(rs.next()){ idcategoria= rs.getInt(1);}
+           
+        } catch (SQLException ex) {
+            throw new RuntimeException("Error de sintaxis SQL", ex);
+        }
+        return idcategoria;
+     }
+     
+     
+     //sirve para poder completar el cmapo categoria del FormularioActualizacion, se usa en buscarKey(idcategoria)
+      //public TipoCategoria obtenerTipoCategoria(Reclamo r){
+      public TipoCategoria obtenerTipoCategoria(int idc){
+         TipoCategoria categoria=null;
+         try {
+            Connection con = Conexion.getConexion(DRIVER, URL, USER, PASS);
+            PreparedStatement ps;
+            ResultSet rs;
+            String instruccionSQL= CONSULTA_NOMCAT;
+            ps=con.prepareStatement(instruccionSQL);
+           //ps.setInt(1, r.getCategoria().getIdcategoria());
+            ps.setInt(1, idc);
+            rs=ps.executeQuery();
+              if(rs.next()){ categoria= TipoCategoria.valueOf(rs.getString(2));}
+           
+        } catch (SQLException ex) {
+            throw new RuntimeException("Error de sintaxis SQL", ex);
+        }
+        return categoria;
+     }
 }

@@ -16,26 +16,8 @@
     <div class="linea"></div>
     
     <div class="contenedor_registro">
-        <h3>Registro en Municipio Web</h3>
-         
-        <!-- Este inserta si hago en el Servlet
-          if((accion == null) || accion.isEmpty()){
-            accion="listar";
-        Pero en la url no se ve ?accion=insertar
-        -->
+       <h3>Registro en Municipio Web</h3>
        <form action="${pageContext.request.contextPath}/PersonaServlet?accion=insertar" method="post">
-       
-       
-        
- <!-- En este caso parece direccionar bien ya que en la url se ve;
- localhost:8080/municipioweb/PersonaServlet?accion=insertar&nombre=once&apellido=c11&dni=5&mail=s11%40mail&telefono=15
-  Pero no inserta nada en BD insertar
-        -->
-      <!--  <form  action="../PersonaServlet" method="get">
-            <input type="hidden" name="accion" value="insertar"> -->
-            
-            <!-- hace lo mismo que el arrib -->
-            <%--<input type="hidden" name="accion" value="<c:out value="insertar"/>" /> --%>
            
          <label for="nom">Nombre:</label>
          <input type="text" id="nom" name="nombre" required="">

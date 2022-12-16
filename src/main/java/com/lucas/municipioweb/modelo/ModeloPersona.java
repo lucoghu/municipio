@@ -11,7 +11,6 @@ import java.util.Collection;
  * 
  */
 public class ModeloPersona implements Modelo<Persona> {
-   // public class ModeloPersona<Persona> implements Modelo<Persona> {
      
      // Persona T;
         private PersonaDAO personaDAO;
@@ -23,10 +22,6 @@ public class ModeloPersona implements Modelo<Persona> {
 
     @Override
     public Collection<Persona> listar() {
-        
-       //Collection<Persona> personas=personaDAO.listarPersonas();  //para prueba
-        // System.out.println("com.lucas.municipioweb.modelo.ModeloPersona.listar()");//para prueba
-    
         return personaDAO.listarPersonas();
  
     }
@@ -36,16 +31,7 @@ public class ModeloPersona implements Modelo<Persona> {
     public int crear(Persona p) {
            return personaDAO.crearPersona(p);
      }
-  /* 
-      @Override
-    public Persona buscar(Persona p) {
-           return personaDAO.buscar(p);
-    
- */  
-    /* @Override
-    public Reclamo buscar(<?> dato){
-          return reclamoDAO.buscar(dato);
-    }*/
+   
     
     @Override
     public int actualizar(Persona p) {
@@ -62,15 +48,17 @@ public class ModeloPersona implements Modelo<Persona> {
           return personaDAO.buscarKey(dato);
     }
        
+      @Override
+    public int eliminar(int dato) {
+           return personaDAO.eliminarPersona(dato);    
+    }
+    
     
    @Override
     public Collection<Persona> buscarEntero(int dato){
           return personaDAO.buscarEntero(dato);
     }
           
-  /*  public int VerficarCadena(String dato){
-         return personaDAO.VerificarCadena(dato);
-    }    */
      // para verficar funcionamiento
   /* public static void main(String[] args) {
         ModeloPersona per=new ModeloPersona(new PersonaDAO());

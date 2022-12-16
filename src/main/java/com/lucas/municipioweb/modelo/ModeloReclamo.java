@@ -26,11 +26,7 @@ public class ModeloReclamo implements Modelo<Reclamo> {
     public int crear(Reclamo r) {
            return reclamoDAO.crearReclamo(r);
      }
-    
-     /* @Override
-    public Reclamo buscar(<?> dato){
-          return reclamoDAO.buscar(dato);
-    }*/
+   
     
     @Override
     public int actualizar(Reclamo r) {
@@ -42,15 +38,16 @@ public class ModeloReclamo implements Modelo<Reclamo> {
           return reclamoDAO.buscarCadena(dato);
     }
     
-  /*  @Override
-    public <H> H prueba(int dato){
-          return (H) reclamoDAO.prueba(dato);
-    }*/
     
     @Override
     public Reclamo buscarKey(int dato){
           return reclamoDAO.buscarKey(dato);
     }
+    
+     @Override
+    public int eliminar(int dato) {
+           return reclamoDAO.eliminarReclamo(dato);
+     }
     
     @Override
     public Collection<Reclamo> buscarEntero(int dato){

@@ -53,6 +53,10 @@ public class Persona {
     public Persona() {
     }
 
+    public Persona(int idpersona) {
+        this.idpersona = idpersona;
+    }
+
     
     
 

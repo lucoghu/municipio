@@ -43,7 +43,7 @@ public class Reclamo {
     }
     
     
-
+    
      public int getIdreclamo() {
         return idreclamo;
     }

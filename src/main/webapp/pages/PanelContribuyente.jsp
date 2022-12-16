@@ -13,29 +13,20 @@
 
     <link rel="stylesheet" href="../css/estilo.css"/>
 </head>
-<body style="background: black">
+<body>
     <h1>Municipio Web - Reclamos</h1>
     <div class="linea"></div>
     
     <p class="Bienvenido">Bienvenido : ${usuariosesion} </p>
     <%--Bienvenido : <%=request.getSession().getAttribute("usuariosesion")%>  --%>
-    <%--Bienvenido : <% String user=(String)session().getAttribute("usuariosesion"); out.print(user); %>  --%>
-   <%--  <% String id=(String)session.getAttribute("idpersona");%>  SE NECESITA OBJETO PERSONA --%>
-     <!--el id "idpesrona" se lo envio al servlet en href ....?id="idpersona", o lo caputuro con:
-      int idpersona=Integer.parseInt((String)sesion.getAttribute("idpersona")); -->
-   
-     <% String persona=(String)session.getAttribute("persona");%>
      <nav>
         <ul class="menu">
-            <li> <a href="ReclamoServlet?accion=listar">Mis Reclamos</a> </li>
-            <li><a href="ReclamoServlet?accion=insertar">Nuevo Reclamo</a></li>
+            <li> <a href="ReclamoServlet?accion=listaruser">Mis Reclamos</a> </li>
+            <li><a href="pages/formularioreclamo.jsp">Nuevo Reclamo</a></li>
         </ul> 
     </nav>
     
-   <!-- <a href="/PersonaServlet?accion=cerrar">Cerrar Sesión</a> -->
-   <!-- href creo sólo usa get, y en el servlet lo parametros los doPost, lo anterior no sirve
-  se puede hacer un servlet logout y su doGet ponerlo del metodo cerraSesion, o hago un formulario para logout-->
-  <form action="cerrar" method="post">
+  <form action="ReclamoServlet?accion=cerrar" method="get">
       <input type="submit" value="Cerrar Sesión">
    </form> 
 </body>

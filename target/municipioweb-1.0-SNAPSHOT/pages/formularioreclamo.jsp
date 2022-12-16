@@ -12,11 +12,19 @@
 </head>
 <body>
     <h1>Formulario de Reclamo</h1>
-    <form action="${pageContext.request.contextPath}/ReclamoServlet?accion=insertar" method="get"> 
+    <form action="${pageContext.request.contextPath}/ReclamoServlet?accion=insertar" method="post"> 
        <label for="domi">Domicilio:</label>
        <input type="text" id="domi" name="domicilio" placeholder="ingrese domicilio" >
 
        <h4>Elija una categoria</h4>
+     <!--  <label for="alum">alumbrado:</label>
+       <input type="checkbox" id="alum" name="alumbrado" >
+       <label for="arb">arbolado:</label>
+       <input type="checkbox" id="arb" name="arbolado" >
+       <label for="lim">limpieza:</label>
+       <input type="checkbox" id="lim" name="limpieza" >
+       <label for="plu">pluvial:</label>
+       <input type="checkbox" id="plu" name="pluvial" ><br><br>  -->
     <fieldset>
        <label>Alumbrado
        <input type="radio" name="categoria" value="alumbrado">
@@ -39,7 +47,7 @@
        <textarea name="descripcion" rows="10" cols="50"></textarea>
        <br><br>
        
-       <!-- se dbería mostrar en fecha actual en el formulario-->
+       <!-- se debería mostrar en fecha actual en el formulario, pero no la muestra, cuando jsp pasa por servlet no toma css-->
      <!--  <label for="fr">Fecha del Reclamo:</label>
        <input type="date" id="fr" disabled="disabled"  name="fechaReclamo" required>
          <br><br> -->

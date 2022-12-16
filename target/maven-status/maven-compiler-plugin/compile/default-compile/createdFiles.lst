@@ -1,10 +1,10 @@
+com\lucas\municipio\resources\JakartaEE9Resource.class
 com\lucas\municipioweb\modelo\dtos\Reclamo.class
 com\lucas\municipioweb\modelo\Conexion.class
 com\lucas\municipioweb\modelo\daos\PersonaDAO.class
 com\lucas\municipioweb\modelo\daos\CategoriaDAO.class
 com\lucas\municipioweb\modelo\Modelo.class
 com\lucas\municipioweb\modelo\ModeloReclamo.class
-com\lucas\municipioweb\controlador\JakartaRestConfiguration.class
 com\lucas\municipioweb\modelo\dtos\TipoCategoria.class
 com\lucas\municipioweb\modelo\dtos\Categoria.class
 com\lucas\municipioweb\controlador\PersonaServlet.class
@@ -14,5 +14,6 @@ com\lucas\municipioweb\modelo\Conexion$1.class
 com\lucas\municipioweb\modelo\ModeloCategoria.class
 com\lucas\municipioweb\modelo\ModeloPersona.class
 com\lucas\municipioweb\modelo\dtos\Persona.class
-com\lucas\municipioweb\resources\JakartaEE9Resource.class
+com\lucas\municipioweb\controlador\prueba.class
+com\lucas\municipioweb\JakartaRestConfiguration.class
 com\lucas\municipioweb\controlador\ReclamoServlet.class

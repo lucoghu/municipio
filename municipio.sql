@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: localhost    Database: municipio
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.26
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (501,'alumbrado'),(502,'arbolado'),(503,'limpieza'),(504,'pluvial');
+INSERT INTO `categoria` VALUES (501,'ALUMBRADO'),(502,'ARBOLADO'),(503,'LIMPIEZA'),(504,'PLUVIAL');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,7 +57,7 @@ CREATE TABLE `persona` (
   `clave` varchar(15) DEFAULT NULL,
   `admin` int DEFAULT NULL,
   PRIMARY KEY (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=106 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +66,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT INTO `persona` VALUES (101,3031,'primero','c1','s1@mail',151,'user1','clave1',1),(102,3021,'segunda','c2','s2@mail',152,'user2','clave2',0),(103,3022,'tercero','contri3','sin3@mail',153,'USER3','f3',0),(104,3022,'tercero','contri3','sin3@mail',153,'USER3','f3',0),(105,3022,'quinto','contri5','sin5@mail',155,'USER5','f5',0);
+INSERT INTO `persona` VALUES (101,3031,'primero','c1','s1@mail',151,'user1','clave1',1),(102,3021,'segunda','c2','s2@mail',152,'user2','clave2',0),(103,3022,'tercero','contri3','sin3@mail',153,'USER3','f3',0),(104,3022,'tercero','contri3','sin3@mail',153,'USER3','f3',0),(105,3022,'quinto','contri5','sin5@mail',155,'USER5','f5',0),(106,3022,'quinto','contri5','sin5@mail',155,'USER5','f5',0),(107,3027,'septimo','contri7','sin7@mail',1557,'USER5','f5',0),(116,3029,'noveno','contri9','s9@mail',1569,'user9','clave9',0);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `reclamo` (
   `Categoria_idcategoria` varchar(45) DEFAULT NULL,
   `Comentario` tinytext,
   PRIMARY KEY (`idreclamo`)
-) ENGINE=InnoDB AUTO_INCREMENT=1004 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=1013 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,4 +108,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-02 11:54:25
+-- Dump completed on 2022-12-15 23:59:01
